@@ -3,20 +3,349 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Outreach AI — coming soon</title>
+  <title>Outreach AI — Autonomous GTM for B2B SaaS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: system-ui, -apple-system, sans-serif; margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #fafaf7; color: #1a1a1a; }
-    .wrap { text-align: center; max-width: 480px; padding: 32px; }
-    h1 { font-size: 32px; font-weight: 600; margin: 0 0 12px; }
-    p { font-size: 16px; line-height: 1.5; color: #555; }
-    .footer { margin-top: 48px; font-size: 12px; color: #999; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0d1b2a;
+      --blue:   #1f6feb;
+      --blue-light: #4d9fff;
+      --cream:  #f5f0e8;
+      --cream-dark: #ede7d9;
+      --white:  #ffffff;
+      --text-muted: #6b7a8d;
+      --radius: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background: var(--cream);
+      color: var(--navy);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(245, 240, 232, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--cream-dark);
+      padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    nav .logo {
+      font-size: 18px; font-weight: 700; color: var(--navy);
+      text-decoration: none; letter-spacing: -0.3px;
+    }
+    nav .logo span { color: var(--blue); }
+    nav .nav-cta {
+      background: var(--blue); color: var(--white);
+      padding: 8px 18px; border-radius: 8px;
+      font-size: 14px; font-weight: 600; text-decoration: none;
+      transition: background 0.18s;
+    }
+    nav .nav-cta:hover { background: var(--blue-light); }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--navy);
+      color: var(--white);
+      padding: 100px 24px 96px;
+      text-align: center;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(31, 111, 235, 0.18);
+      border: 1px solid rgba(31, 111, 235, 0.4);
+      color: var(--blue-light);
+      font-size: 13px; font-weight: 600;
+      padding: 5px 14px; border-radius: 100px;
+      margin-bottom: 28px; letter-spacing: 0.4px;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 700; line-height: 1.12;
+      letter-spacing: -1.5px; margin-bottom: 24px;
+      max-width: 760px; margin-left: auto; margin-right: auto;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--blue-light), #a5d4ff);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero .sub {
+      font-size: 18px; color: #a8b8cc;
+      max-width: 560px; margin: 0 auto 44px;
+      line-height: 1.7;
+    }
+    .hero .cta-group { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--blue); color: var(--white);
+      padding: 15px 32px; border-radius: var(--radius);
+      font-size: 16px; font-weight: 700; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: background 0.18s, transform 0.14s;
+      border: none; cursor: pointer;
+    }
+    .btn-primary:hover { background: var(--blue-light); transform: translateY(-1px); }
+    .btn-secondary {
+      background: transparent; color: #a8b8cc;
+      padding: 15px 32px; border-radius: var(--radius);
+      font-size: 16px; font-weight: 600; text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.15);
+      transition: border-color 0.18s, color 0.18s;
+    }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.4); color: var(--white); }
+
+    /* ── HOW IT WORKS ── */
+    .how {
+      padding: 96px 24px;
+      background: var(--cream);
+    }
+    .section-label {
+      text-align: center;
+      font-size: 12px; font-weight: 700; letter-spacing: 2px;
+      color: var(--blue); text-transform: uppercase; margin-bottom: 14px;
+    }
+    .section-title {
+      text-align: center;
+      font-size: clamp(28px, 3.5vw, 42px);
+      font-weight: 700; letter-spacing: -0.8px;
+      color: var(--navy); margin-bottom: 56px;
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      max-width: 960px; margin: 0 auto;
+    }
+    .step {
+      background: var(--white);
+      border: 1px solid var(--cream-dark);
+      border-radius: var(--radius);
+      padding: 36px 32px;
+    }
+    .step .step-num {
+      width: 40px; height: 40px;
+      background: var(--navy); color: var(--white);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 700; margin-bottom: 20px;
+    }
+    .step h3 {
+      font-size: 17px; font-weight: 700; margin-bottom: 10px; color: var(--navy);
+    }
+    .step p { font-size: 15px; color: var(--text-muted); line-height: 1.65; }
+    .step .tag {
+      display: inline-block; margin-top: 16px;
+      background: rgba(31,111,235,0.08); color: var(--blue);
+      font-size: 12px; font-weight: 600; padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    /* ── PRICING ── */
+    .pricing {
+      padding: 96px 24px;
+      background: var(--navy);
+      color: var(--white);
+    }
+    .pricing .section-title { color: var(--white); }
+    .pricing .section-label { color: var(--blue-light); }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 720px; margin: 0 auto;
+    }
+    .plan {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 40px 36px;
+    }
+    .plan.featured {
+      background: var(--blue);
+      border-color: var(--blue);
+    }
+    .plan .plan-name {
+      font-size: 13px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: #a8b8cc;
+      margin-bottom: 8px;
+    }
+    .plan.featured .plan-name { color: rgba(255,255,255,0.75); }
+    .plan .price {
+      font-size: 48px; font-weight: 700; letter-spacing: -2px;
+      margin-bottom: 4px;
+    }
+    .plan .price span { font-size: 18px; font-weight: 500; letter-spacing: 0; }
+    .plan .plan-sub {
+      font-size: 14px; color: #a8b8cc; margin-bottom: 28px;
+    }
+    .plan.featured .plan-sub { color: rgba(255,255,255,0.7); }
+    .plan ul { list-style: none; margin-bottom: 36px; }
+    .plan ul li {
+      font-size: 15px; color: #c4d0de;
+      padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .plan.featured ul li { color: rgba(255,255,255,0.9); border-bottom-color: rgba(255,255,255,0.12); }
+    .plan ul li::before { content: "✓"; color: var(--blue-light); font-weight: 700; font-size: 13px; }
+    .plan.featured ul li::before { color: rgba(255,255,255,0.9); }
+    .btn-plan {
+      display: block; width: 100%; text-align: center;
+      padding: 14px; border-radius: 10px;
+      font-size: 15px; font-weight: 700; text-decoration: none;
+      transition: background 0.18s, transform 0.14s;
+    }
+    .plan:not(.featured) .btn-plan {
+      background: rgba(255,255,255,0.08); color: var(--white);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .plan:not(.featured) .btn-plan:hover { background: rgba(255,255,255,0.15); }
+    .plan.featured .btn-plan {
+      background: var(--white); color: var(--blue);
+    }
+    .plan.featured .btn-plan:hover { background: var(--cream); transform: translateY(-1px); }
+    .trial-note {
+      text-align: center; margin-top: 20px;
+      font-size: 14px; color: #6b7a8d;
+    }
+
+    /* ── FOOTER CTA ── */
+    .footer-cta {
+      background: var(--cream);
+      padding: 96px 24px;
+      text-align: center;
+    }
+    .footer-cta h2 {
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 700; letter-spacing: -0.8px;
+      color: var(--navy); margin-bottom: 16px;
+      max-width: 600px; margin-left: auto; margin-right: auto;
+    }
+    .footer-cta p {
+      font-size: 17px; color: var(--text-muted);
+      margin-bottom: 36px;
+    }
+
+    footer {
+      background: var(--navy);
+      color: #6b7a8d;
+      padding: 28px 24px;
+      text-align: center;
+      font-size: 13px;
+    }
+    footer a { color: #a8b8cc; text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .hero { padding: 72px 20px 72px; }
+      .how, .pricing, .footer-cta { padding: 72px 20px; }
+      .step { padding: 28px 24px; }
+      .plan { padding: 32px 24px; }
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>Outreach AI</h1>
-    <p>Coming soon. We're building this.</p>
-    <p class="footer">Powered by Stipple</p>
-  </div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="logo">Outreach<span>AI</span></a>
+    <a href="#waitlist" class="nav-cta">Join the waitlist</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="waitlist">
+    <div class="badge">Autonomous GTM · B2B SaaS</div>
+    <h1>Your AI GTM team — <em>finds leads, drafts cold outreach, books meetings</em>, all approved by you.</h1>
+    <p class="sub">Outreach AI runs your entire go-to-market motion autonomously — so you can focus on closing, not chasing.</p>
+    <div class="cta-group">
+      <a href="#pricing" class="btn-primary">
+        Join the waitlist
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#how" class="btn-secondary">See how it works</a>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how" id="how">
+    <p class="section-label">How it works</p>
+    <h2 class="section-title">Three steps to autonomous GTM</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Connect your CRM + tell us your ICP</h3>
+        <p>Link your CRM in one click and describe your ideal customer profile. Outreach AI learns your target in minutes.</p>
+        <span class="tag">5-minute setup</span>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Daily autonomous loop runs GTM</h3>
+        <p>Every day, Outreach AI sources fresh leads, drafts personalised cold outreach, and schedules meetings — completely on its own.</p>
+        <span class="tag">Runs 24 / 7</span>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>You approve every external action</h3>
+        <p>No email is sent, no meeting booked without your sign-off. Every action is logged in a full audit trail — you stay in control.</p>
+        <span class="tag">Full audit trail</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing" id="pricing">
+    <p class="section-label">Pricing</p>
+    <h2 class="section-title">Simple, founder-friendly pricing</h2>
+    <div class="pricing-grid">
+      <div class="plan">
+        <p class="plan-name">Starter</p>
+        <p class="price">$99<span>/mo</span></p>
+        <p class="plan-sub">50 leads per month</p>
+        <ul>
+          <li>50 AI-sourced leads / month</li>
+          <li>Personalised outreach drafts</li>
+          <li>CRM integration</li>
+          <li>Founder approval queue</li>
+          <li>Full audit trail</li>
+        </ul>
+        <a href="#waitlist" class="btn-plan">Start free trial</a>
+      </div>
+      <div class="plan featured">
+        <p class="plan-name">Pro</p>
+        <p class="price">$299<span>/mo</span></p>
+        <p class="plan-sub">Unlimited leads</p>
+        <ul>
+          <li>Unlimited AI-sourced leads</li>
+          <li>Personalised outreach drafts</li>
+          <li>Meeting scheduling automation</li>
+          <li>CRM + calendar integrations</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#waitlist" class="btn-plan">Start free trial</a>
+      </div>
+    </div>
+    <p class="trial-note">7-day free trial on all plans. No credit card required.</p>
+  </section>
+
+  <!-- FOOTER CTA -->
+  <section class="footer-cta">
+    <h2>Ready to put your GTM on autopilot?</h2>
+    <p>Join the waitlist and get early access.</p>
+    <a href="#waitlist" class="btn-primary">Join the waitlist</a>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Outreach AI &mdash; <a href="mailto:hello@outreachai.stipple.site">hello@outreachai.stipple.site</a></p>
+  </footer>
+
 </body>
 </html>
